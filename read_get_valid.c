@@ -42,6 +42,7 @@ int    validation(t_t *tet, unsigned long fig, char letter)
             tet->width = std[i] / 10 % 10;
             tet->height = std[i] % 10;
             tet->letter = letter;
+            tet->flag = 0;
             return (0);
         }
         i++;
@@ -49,18 +50,18 @@ int    validation(t_t *tet, unsigned long fig, char letter)
     return (-1);
 }
 
-int     ft_read_inputfile(t_t *tet, int fd)
+int     ft_read_inputfile(t_t *tet, int fd, int count)
 {
     char            buf[BUFF_SIZE];
     unsigned long   fig;
     char            letter;
     int             bates;
-    int             count;
+    int             tmp;
 
     letter = 'A';
     while ((bates = read(fd, buf, 21)) >= 20)
     {
-        count = bates;
+        tmp = bates;
         if (!(fig = get_tetfig(buf)))
             return (-1);
         while (!(fig & 0xf))
@@ -69,6 +70,7 @@ int     ft_read_inputfile(t_t *tet, int fd)
             fig >>= 1;
         if (letter > 'Z' || validation(tet++, fig, letter++))
             return (-1);
+        count++;
     }
-    return (bates == 0 && count == 20 ? 0 : -1);
+    return (bates == 0 && tmp == 20 ? count : -1);
 }
