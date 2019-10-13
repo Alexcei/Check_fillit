@@ -6,7 +6,7 @@
 /*   By: bpole <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 13:07:18 by bpole             #+#    #+#             */
-/*   Updated: 2019/10/13 16:25:04 by bpole            ###   ########.fr       */
+/*   Updated: 2019/10/13 16:30:39 by bpole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int			main(int ac, char **av)
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		return (ft_put_error("error"));
 	ft_bzero(tet, sizeof(t_tet) * FIG_MAX + 1);
-	ft_bzero(arr, sizeof(arr));
 	if ((count = read_file(tet, fd, count)) == -1)
 		return (ft_put_error("error"));
 	while (size * size < count * 4 || !find_solution(tet, arr, size))
