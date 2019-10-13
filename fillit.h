@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fillit.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpole <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/13 13:09:13 by bpole             #+#    #+#             */
+/*   Updated: 2019/10/13 13:09:30 by bpole            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FILLIT_H
 # define FILLIT_H
 
@@ -9,20 +21,19 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-
-typedef struct  s_t
+typedef struct	s_tet
 {
-    unsigned long    value;
-    int         width;
-    int         height;
-    int     	x;
-    int     	y;
-    char		letter;
-    struct s_t	*previous;
-}				t_t;
+	long		value;
+	char		letter;
+	int			width;
+	int			height;
+	int			x;
+	int			y;
 
-unsigned long   get_tetfig(const char *buf);
-int             validation(t_t *tet, unsigned long fig, char letter);
-int             ft_read_inputfile(t_t *tet, int fd);
+}				t_tet;
+
+int				read_file(t_tet *tet, int fd, int size);
+int				find_solution(t_tet *tet, short *arr, int size);
+void			print_result(t_tet *tet, int size);
 
 #endif
