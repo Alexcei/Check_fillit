@@ -6,7 +6,7 @@
 /*   By: bpole <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 13:09:40 by bpole             #+#    #+#             */
-/*   Updated: 2019/10/13 13:20:02 by bpole            ###   ########.fr       */
+/*   Updated: 2019/10/15 20:23:22 by bpole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int				find_solution(t_tet *tet, short *arr, int size)
 {
 	if (!tet->value)
 		return (1);
-	tet->x = 0;
 	tet->y = 0;
 	while (tet->y + tet->height <= size)
 	{

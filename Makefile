@@ -6,7 +6,7 @@
 #    By: bpole <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/11 10:08:31 by bpole             #+#    #+#              #
-#    Updated: 2019/10/13 16:12:20 by bpole            ###   ########.fr        #
+#    Updated: 2019/10/15 20:20:48 by bpole            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,11 @@ FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME):
+%.o: %.c
+	$(CC) -c $(FLAGS) $<
+
+$(NAME): $(OBJ)
 	$(MAKE) -C $(LIB_DIR)
-	$(CC) $(FLAGS) -c $(SRC) -I $(INCLUDE)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 
 clean:
