@@ -6,7 +6,7 @@
 /*   By: bpole <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 13:07:18 by bpole             #+#    #+#             */
-/*   Updated: 2019/10/15 20:21:53 by bpole            ###   ########.fr       */
+/*   Updated: 2019/10/20 11:25:36 by bpole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,26 @@ static int	ft_put_error(const char *s)
 	if (s)
 		ft_putendl(s);
 	return (-1);
+}
+
+static void     previous(t_tet *tet)
+{
+    int     i;
+    int     j;
+
+    i = -1;
+    while (tet[++i].letter)
+    {
+        j = i;
+        while (j-- > 0)
+        {
+            if (tet[i].value == tet[j].value)
+            {
+                tet[i].previous = &tet[j];
+                break;
+            }
+        }
+    }
 }
 
 int			main(int ac, char **av)
@@ -36,6 +56,7 @@ int			main(int ac, char **av)
 	ft_bzero(tet, sizeof(t_tet) * FIG_MAX + 1);
 	if ((count = read_file(tet, fd, count)) == -1)
 		return (ft_put_error("error"));
+    previous(tet);
 	while (size * size < count * 4 || !find_solution(tet, arr, size))
 	{
 		ft_bzero(arr, sizeof(arr));

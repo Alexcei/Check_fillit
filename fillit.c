@@ -6,7 +6,7 @@
 /*   By: bpole <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 13:09:40 by bpole             #+#    #+#             */
-/*   Updated: 2019/10/15 20:23:22 by bpole            ###   ########.fr       */
+/*   Updated: 2019/10/20 12:03:48 by bpole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,23 @@ int				read_file(t_tet *tet, int fd, int count)
 	return (bates == 0 && tmp == 20 ? count : -1);
 }
 
+#include <stdio.h>
 int				find_solution(t_tet *tet, short *arr, int size)
 {
-	if (!tet->value)
-		return (1);
-	tet->y = 0;
+    if (!tet->value)
+        return (1);
+	if (tet->previous)
+	{
+        tet->x = tet->previous->x + 1;
+        tet->y = tet->previous->y;
+    }
+	else
+    {
+	    tet->x = 0;
+	    tet->y = 0;
+    }
 	while (tet->y + tet->height <= size)
 	{
-		tet->x = 0;
 		while (tet->x + tet->width <= size)
 		{
 			if (!(*(long *)(arr + tet->y) & tet->value << tet->x))
@@ -103,6 +112,7 @@ int				find_solution(t_tet *tet, short *arr, int size)
 			}
 			tet->x++;
 		}
+        tet->x = 0;
 		tet->y++;
 	}
 	return (0);

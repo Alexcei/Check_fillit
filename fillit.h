@@ -6,7 +6,7 @@
 /*   By: bpole <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 13:09:13 by bpole             #+#    #+#             */
-/*   Updated: 2019/10/13 13:09:30 by bpole            ###   ########.fr       */
+/*   Updated: 2019/10/20 10:49:19 by bpole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-typedef struct	s_tet
+typedef struct	    s_tet
 {
-	long		value;
-	char		letter;
-	int			width;
-	int			height;
-	int			x;
-	int			y;
+	long		    value;
+	char		    letter;
+	int			    width;
+	int			    height;
+	int			    x;
+	int			    y;
+    struct s_tet    *previous;
+}				    t_tet;
 
-}				t_tet;
-
-int				read_file(t_tet *tet, int fd, int size);
-int				find_solution(t_tet *tet, short *arr, int size);
-void			print_result(t_tet *tet, int size);
+int				    read_file(t_tet *tet, int fd, int size);
+int				    find_solution(t_tet *tet, short *arr, int size);
+void			    print_result(t_tet *tet, int size);
 
 #endif
